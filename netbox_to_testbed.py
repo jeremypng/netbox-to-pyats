@@ -102,6 +102,8 @@ def get_devices_by_tag(tag,debug,netbox_token,netbox_host,netbox_port,netbox_ssl
                     }
                 }
             }
+            if device.config_context.get("pyats_custom"):
+                testbed_devices[device.name]["custom"] = device.config_context["pyats_custom"]
             for interface in nb.dcim.interfaces.filter(device=device.name):
                 if interface.cable:
                     interface.connected_endpoint.device.full_details()
